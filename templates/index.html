@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Rule Engine Evaluation</h1>
+    <form id="evaluation-form">
+        <label for="rule1">Rule 1:</label>
+        <input type="text" id="rule1" name="rule1" placeholder="Enter rule 1" required>
+        
+        <label for="rule2">Rule 2:</label>
+        <input type="text" id="rule2" name="rule2" placeholder="Enter rule 2" required>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" placeholder="Enter age" required>
+        
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" placeholder="Enter department" required>
+        
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" placeholder="Enter salary" required step="0.01">
+        
+        <label for="experience">Experience:</label>
+        <input type="number" id="experience" name="experience" placeholder="Enter years of experience" required>
+        
+        <button type="submit">Evaluate</button>
+    </form>
+
+    <h2>Results:</h2>
+    <div id="results" class="results">
+        <!-- Results will be dynamically populated here -->
+    </div>
+
+    <script>
+        document.getElementById('evaluation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            fetch('/evaluate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `
+                    <ul>
+                        <li><strong>Rule 1 Satisfied:</strong> ${data.rule1_satisfied}</li>
+                        <li><strong>Rule 2 Satisfied:</strong> ${data.rule2_satisfied}</li>
+                        <li><strong>Combined Rule Satisfied:</strong> ${data.combined_rule_satisfied}</li>
+                    </ul>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>
