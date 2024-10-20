@@ -62,8 +62,8 @@ Easy retrieval of evaluation data for analysis or debugging.
 
 ### **1. Cloning the Repository**
     ```bash
-     git clone https://github.com/Alisha-alias/Rule_Engine_with_Abstract_Syntax_Tree
-     
+     git clone https://github.com/Alisha-alias/Rule_Engine_with_Abstract_Syntax_Tree.git
+     cd Rule_Engine_with_Abstract_Syntax_Tree     
 
 ### **2. Create a Virtual Environment**
     ```bash
